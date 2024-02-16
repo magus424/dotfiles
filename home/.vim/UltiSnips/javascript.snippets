@@ -1,0 +1,50 @@
+priority 50
+
+snippet if "if" b
+if (${1:/* condition */})
+{
+	${2:${VISUAL}}
+}
+endsnippet
+
+snippet else "else" b
+else
+{
+	${1:${VISUAL}}
+}
+endsnippet
+
+snippet elif "elseif" b
+else if (${1:/* condition */})
+{
+	${2:${VISUAL}}
+}
+endsnippet
+
+snippet do "do" b
+do
+{
+	${2:${VISUAL}}
+} while (${1:/* condition */});"
+endsnippet
+
+snippet while "while loop" b
+while (${1:/* condition */})
+{
+	${2:${VISUAL}}
+}
+endsnippet
+
+snippet for "for" b
+for (var ${2:i} = 0, l = ${1:arr}.length; $2 < l; $2++)
+{
+	var ${3:v} = $1[$2];
+	${4:${VISUAL}}
+}
+for ($${2:i} = 0; $$2 < ${1:count}; $$2${3:++})
+{
+	${4:${VISUAL}}
+}
+endsnippet
+
+# :vim:ft=snippets:

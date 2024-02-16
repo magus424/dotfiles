@@ -1,0 +1,858 @@
+" vim: ts=4 sts=4 sw=4 et ai
+
+set nocompatible
+filetype off
+
+" Vundle start
+
+pythonx import sys; from vim import command; command("let python_version = '%s'" % sys.version[2:3])
+
+let g:netrw_silent = 1
+
+if python_version < 6
+    let g:airline_powerline_fonts = 1
+    let g:airline_enable_hunks    = 0
+endif
+
+let g:easy_align_delimiters = {
+\  '=': { 'pattern': '===\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|=&\|[:+/*!%^=><&|.-]\?=[#?]\?',
+\         'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0 },
+\  ';': { 'pattern': ':',  'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0 },
+\  ':': { 'pattern': ':',  'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0 }
+\ }
+
+let g:delimitMate_excluded_ft = 'scss'
+let g:delimitMate_expand_cr   = 1
+
+set completeopt=menuone,longest
+let g:SuperTabCrMapping                    = 0
+let g:SuperTabLongestEnhanced              = 1
+let g:SuperTabLongestHighlight             = 1
+let g:SuperTabDefaultCompletionType        = '<c-p>'
+let g:SuperTabContextDefaultCompletionType = '<c-p>'
+let g:SuperTabNoCompleteAfter              = ['^', ',', '\s', '"', "'"]
+
+let g:UltiSnipsExpandTrigger       = "<Tab>"
+let g:UltiSnipsListSnippets        = "<C-S-Tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<C-n>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-p>"
+
+" let g:gitgutter_sign_column_always = 1
+" set signcolumn=yes
+let g:gitgutter_diff_args          = '-w'
+
+let g:ale_completion_enabled = 1
+if isdirectory("/home/vagrant/html/standards/Slickdeals")
+    let g:ale_php_phpcs_standard = '/home/vagrant/html/standards/Slickdeals'
+endif
+
+let g:syntastic_disabled_filetypes       = ['scss']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_enable_signs             = 1
+let g:syntastic_filetype_map             = {"html.twig": "twig"}
+let g:syntastic_javascript_checkers      = ['jshint']
+let g:syntastic_python_flake8_args       = '--ignore=E501,E128'
+let g:syntastic_html_tidy_ignore_errors  = [
+            \ '<a> escaping malformed URI reference',
+            \ '<img> escaping malformed URI reference',
+            \ 'trimming empty <span>',
+            \ "plain text isn\'t allowed in <head> elements",
+            \ '<if> is not recognized!',
+            \ 'discarding unexpected <if>',
+            \ 'discarding unexpected </if>',
+            \ '<else> is not recognized!',
+            \ 'discarding unexpected <else>',
+            \ "'<' + '/' + letter not allowed here"
+            \ ]
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+
+let g:prosession_per_branch = 1
+
+if &compatible == 0
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+
+    Plugin 'gmarik/Vundle.vim'
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'tomtom/tcomment_vim'
+    Plugin 'godlygeek/tabular'
+    Plugin 'junegunn/vim-easy-align'
+    Plugin 'Smart-Home-Key'
+    Plugin 'matchit.zip'
+    " Plugin 'SirVer/ultisnips'
+    " Plugin 'honza/vim-snippets'
+    Plugin 'ervandew/supertab'
+    Plugin 'wincent/command-t'
+    Plugin 'wellle/targets.vim'
+    " Plugin 'pangloss/vim-javascript'
+    Plugin 'jelera/vim-javascript-syntax'
+    Plugin 'dag/vim-fish'
+    Plugin 'JulesWang/css.vim'
+    Plugin 'cakebaker/scss-syntax.vim'
+    Plugin 'evidens/vim-twig'
+    Plugin 'tokutake/twig-indent'
+    Plugin 'Raimondi/delimitMate'
+    if v:version >= 800
+        Plugin 'w0rp/ale'
+    else
+        Plugin 'scrooloose/syntastic'
+    endif
+
+    " Plugin 'lvht/phpcd.vim'
+
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'mileszs/ack.vim'
+    Plugin 'airblade/vim-gitgutter'
+    Plugin 'tpope/vim-obsession'
+    " Plugin 'dhruvasagar/vim-prosession'
+    Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'ap/vim-css-color'
+    Plugin 'christoomey/vim-tmux-navigator'
+    Plugin 'benmills/vimux'
+    Plugin 'guns/xterm-color-table.vim'
+
+    " Plugin 'Rykka/colorv.vim'
+    " Plugin 'nathanaelkane/vim-indent-guides'
+    " Plugin 'Shougo/unite.vim'
+    " if filereadable($HOME.'/.csearchindex')
+    "     Plugin 'brandonbloom/csearch.vim'
+    "     Plugin 'junkblocker/unite-codesearch'
+    " endif
+    " Plugin 'vim-scripts/closetag.vim'
+    " Plugin 'jsoriano/vim-dbgp'
+    " Plugin 'joonty/vdebug'
+
+    if python_version > 5 && !has('nvim')
+        Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+    elseif version >= 720
+        Plugin 'vim-airline/vim-airline'
+    endif
+
+    call vundle#end()
+endif
+
+" Vundle end
+
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+
+set autoread
+set autowrite
+set backspace=indent,eol,start
+set clipboard+=unnamedplus
+set diffopt+=iwhite
+set history=50
+set hlsearch
+set incsearch
+set laststatus=2
+set list
+set listchars=tab:→\ ,trail:∙
+set fillchars+=vert:│
+if has("mouse")
+    set mouse=a
+endif
+set nocindent
+set gdefault
+set ignorecase
+set smartcase
+set number
+set redrawtime=5000
+set ruler
+set scrolloff=2
+set sessionoptions-=options
+set shell=/bin/bash
+set showcmd
+set showmatch
+set showmode
+set showtabline=2
+set splitright
+set tabpagemax=100
+set textwidth=0
+set t_ut=
+set title
+set viminfo='20,\"50
+
+set autoindent
+set expandtab
+set smarttab
+
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+set wildmenu
+set wildignore+=.git/*,.hg/*,.svn/*,*.orig          " version control
+set wildignore+=._*,.DS_Store                       " OSX nonsense
+set wildignore+=*.aux,*.out,*.toc                   " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg      " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest    " compiled object files
+set wildignore+=*.spl,.sw?,.py?                     " more binary stuff
+
+" Suffixes that get lower priority when doing tab completion for filenames.
+" These are files we are not likely to want to edit or read.
+set suffixes=.bak,~,.o,.info,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx
+
+set directory=$HOME/.vim/swap//
+if !isdirectory(&directory)
+  call mkdir(&directory)
+endif
+
+" set undodir=$HOME/.vim/undo//
+" if !isdirectory(&undodir)
+"   call mkdir(&undodir)
+" endif
+" set undofile
+" set undolevels=100
+" set undoreload=1000
+
+" set backupdir=$HOME/.vim/backup//
+" if !isdirectory(&backupdir)
+"   call mkdir(&backupdir)
+" endif
+" set backupcopy=yes
+" set backup
+
+syntax on
+set background=dark
+colorscheme mycolors
+
+if has("autocmd")
+    filetype plugin on
+    filetype indent on
+    let php_folding   = 2
+    let php_sql_query = 1
+    let php_baselib   = 1
+    au BufEnter Debugger* setlocal scrolloff=0
+endif
+
+" Highlight conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+function! Airpower_ffenc()
+    let expected = get(g:, 'airline#parts#ffenc#skip_expected_string', '')
+    let bomb     = &l:bomb ? '[BOM]' : ''
+    let ff       = strlen(&ff) ? &ff : ''
+    let fe       = strlen(&fenc) ? '  '.&fenc : ''
+    let ft       = strlen(&filetype) ? '  '.&filetype : ''
+    if expected is# ff.fe.bomb.ft
+        return ''
+    else
+        return ff.fe.bomb.ft
+    endif
+endfunction
+
+function! Airpower_modified()
+    if &modified
+        " call airline#parts#define_accent('airpower_modified', 'yellow')
+        return ' M'
+    else
+        return ''
+    endif
+endfunction
+
+function! AirlineInit()
+    if (exists('g:loaded_airline') && g:loaded_airline)
+
+        let g:airline_skip_empty_sections = 1
+
+        let g:airline_left_sep = ''
+        let g:airline_left_alt_sep = ''
+        let g:airline_right_sep = ''
+        let g:airline_right_alt_sep = ''
+        let g:airline_symbols.branch = ''
+        let g:airline_symbols.readonly = ''
+        let g:airline_symbols.linenr = ''
+        let g:airline_symbols.maxlinenr = '☰'
+
+        " call airline#parts#define_raw('linenr', '%{g:airline_symbols.linenr} #__accent_green#%4l:%-2v#__restore__#')
+
+        call airline#highlighter#add_accent('grcol')
+        call airline#highlighter#add_accent('ymod')
+        call airline#highlighter#add_accent('gsplit')
+
+        let g:airline_section_b = airline#section#create([
+                    \ 'branch',
+                    \ ' %#__accent_gsplit#%#__restore__# %F',
+                    \ '%#__accent_ymod#%{Airpower_modified()}%#__restore__#'])
+        let g:airline_section_c = ' '
+        let g:airline_section_x = "%{airline#util#wrap(Airpower_ffenc(),0)}"
+        let g:airline_section_y = "%2p%%"
+        let g:airline_section_z = "%{g:airline_symbols.linenr} %4l%#__accent_grcol#:%-2v%#__restore__#"
+        " let g:airline_section_z = airline#section#create(['linenr'])
+
+        " call airline#load_theme()
+        AirlineTheme airpower
+
+        " let g:airline#extensions#tabline#enabled = 1
+        " let g:airline_symbols.space = "\ua0"
+        " let spc = g:airline_symbols.space
+        " let g:airline_section_a       = airline#section#create_left(['mode', 'paste', 'capslock', 'iminsert'])
+        " let g:airline_section_c       = airline#section#create(['%<', 'file', spc, 'readonly'])
+        " let g:airline_section_gutter  = airline#section#create(['%='])
+        " let g:airline_section_x       = airline#section#create_right(['tagbar', 'filetype'])
+        " let g:airline_section_y       = airline#section#create_right(['ffenc'])
+        " let g:airline_section_z       = airline#section#create(['linenr', ':%3c '])
+    endif
+endfunction
+autocmd VimEnter * call AirlineInit()
+
+set statusline=
+set statusline+=%f                               " Path
+set statusline+=%m                               " Modified flag
+set statusline+=%r                               " Readonly flag
+set statusline+=%w                               " Preview window flag
+if exists('*SyntasticStatuslineFlag')
+    set statusline+=\                            " Space
+    set statusline+=%{SyntasticStatuslineFlag()} " Syntastic info
+endif
+set statusline+=%=                               " Right align
+if exists('fugitive#statusline')
+    set statusline+=%{fugitive#statusline()}     " Fugitive info
+    set statusline+=\                            " Space
+endif
+set statusline+=(                                " (
+set statusline+=%{&ff}                           " Format (unix/dos)
+set statusline+=/                                " /
+set statusline+=%{strlen(&fenc)?&fenc:&enc}      " Encoding (utf-8)
+set statusline+=/                                " /
+set statusline+=%{strlen(&ft)?&ft:'none'}        " Type (python)
+set statusline+=)                                " )
+set statusline+=\ (line\ %l\/%L,\ col\ %03c)     " Line and column position and counts.
+
+function! GetSyntaxID()
+    return synID(line('.'), col('.'), 1)
+endfunction
+
+function! GetSyntaxParentID()
+    return synIDtrans(GetSyntaxID())
+endfunction
+
+function! GetSyntax()
+    echo synIDattr(GetSyntaxID(), 'name')
+    exec "hi ".synIDattr(GetSyntaxParentID(), 'name')
+endfunction
+
+function! WipeoutOld()
+    " list of *all* buffer numbers
+    let l:buffers = range(1, bufnr('$'))
+
+    " what tab page are we in?
+    let l:currentTab = tabpagenr()
+    try
+        " go through all tab pages
+        let l:tab = 0
+        while l:tab < tabpagenr('$')
+            let l:tab += 1
+
+            " go through all windows
+            let l:win = 0
+            while l:win < winnr('$')
+                let l:win += 1
+                " whatever buffer is in this window in this tab, remove it from
+                " l:buffers list
+                let l:thisbuf = winbufnr(l:win)
+                call remove(l:buffers, index(l:buffers, l:thisbuf))
+            endwhile
+        endwhile
+
+        " if there are any buffers left, delete them
+        if len(l:buffers)
+            execute 'bwipeout' join(l:buffers)
+        endif
+    finally
+        " go back to our original tab page
+        execute 'tabnext' l:currentTab
+    endtry
+endfunction
+
+function! Wipeout()
+    let l:currentTab = tabpagenr()
+    let l:remove_buffers = []
+    let g:active_buffers = []
+
+    silent let l:cmdt_buf = bufnr("GoToFile")
+    if l:cmdt_buf > -1
+        call add(g:active_buffers, l:cmdt_buf)
+    endif
+
+    silent let l:unite_buf = bufnr("[unite] - default")
+    if l:unite_buf > -1
+        call add(g:active_buffers, l:unite_buf)
+    endif
+
+    tabdo let g:active_buffers += tabpagebuflist()
+
+    let l:buf = 0
+    while l:buf < bufnr('$')
+        let l:buf += 1
+        if index(g:active_buffers, l:buf) == -1
+            call add(l:remove_buffers, l:buf)
+        endif
+    endwhile
+    try
+        if len(l:remove_buffers) > 0
+            execute 'bwipeout' join(l:remove_buffers, ' ')
+        endif
+    finally
+        execute 'tabnext' l:currentTab
+    endtry
+    unlet g:active_buffers
+endfunction
+
+if &term == "screen" || &term == "screen-256color"
+    set t_ts=k
+    set t_fs=\
+    if !has('nvim')
+        set ttymouse=xterm2
+    end
+endif
+
+if !has('nvim')
+    if has("mouse_sgr")
+        set ttymouse=sgr
+    else
+        set ttymouse=xterm2
+    end
+end
+
+" Set window title to same as statusline
+" let &titlestring=&statusline
+
+" We know xterm-debian is a color terminal
+if &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
+    set t_Co=16
+    set t_Sf=[3%dm
+    set t_Sb=[4%dm
+endif
+
+
+"" Keybinds
+
+let mapleader=","
+nmap ; :
+xmap ; :
+
+" Easier diffget
+if &diff
+    nnoremap <Leader>d[ :diffget 1
+    nnoremap <Leader>d] :diffget 3
+endif
+
+" Alt+P toggles paste
+nnoremap <silent> <Esc>p :set invpaste<CR>
+nnoremap <silent> <A-p> :set invpaste<CR>
+
+" // clears search highlight
+nnoremap <silent> // :noh<CR>
+
+" Space toggles folds
+nnoremap <Space> za
+xnoremap <Space> za
+
+" Ctrl+L to insert =>
+inoremap <C-l> <Space>=><Space>
+
+" upper/lower word
+nmap <leader>U m`gUiw``
+nmap <leader>L m`guiw``
+
+" z0 = recursively open top-level fold we're in
+nnoremap z0 zCz0
+
+" Tab indenting
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
+
+xnoremap <Tab> >gv
+xnoremap <S-Tab> <gv
+
+" Quick word jumping with Ctrl+Arrows
+inoremap <Esc>[C <S-Right>
+inoremap <Esc>[D <S-Left>
+
+nnoremap <Esc>[C <S-Right>
+nnoremap <Esc>[D <S-Left>
+
+" Fix shift+arrow keys
+inoremap <Esc>[A <Up>
+inoremap <Esc>[B <Down>
+nnoremap <Esc>[A <Up>
+nnoremap <Esc>[B <Down>
+xnoremap <Esc>[A <Up>
+xnoremap <Esc>[B <Down>
+
+" Tab movement keys
+nnoremap <silent> <Esc><Right> :tabn<CR>
+nnoremap <silent> <Esc><Left> :tabp<CR>
+nnoremap <silent> <A-Right> :tabn<CR>
+nnoremap <silent> <A-Left> :tabp<CR>
+
+" Change Y to copy from current character to end of line
+" (mimic y0's behavior but backwards)
+noremap Y y$
+
+" Make p in Visual mode replace the selected text with the "" register.
+xnoremap p "_dP
+xnoremap P "_dP
+
+" Disable man key
+" nnoremap K <nop>
+
+nnoremap <silent> <Leader>at :ALEToggle<CR>
+nnoremap <silent> <Leader>an :ALENext<CR>
+
+" Use ,d (or ,dd or ,dj or 20,dd) to delete a line without adding it to the
+" yanked stack (also, in visual mode)
+nnoremap <silent> <Leader>d "_d
+xnoremap <silent> <Leader>d "_d
+
+" <Leader>y, <Leader>yy, etc to yank to system clipboard
+nnoremap <silent> <Leader>y "+y
+xnoremap <silent> <Leader>y "+y
+
+" <Leader>p, <Leader>pp, etc to paste from system clipboard
+nnoremap <silent> <Leader>p "+p
+xnoremap <silent> <Leader>p "+p
+nnoremap <silent> <Leader>P "+P
+xnoremap <silent> <Leader>P "+P
+
+" Save session
+" noremap <silent> <F8> :wa <Bar> mksession! ~/.vim/session <Bar> echo "Saved session"<CR>
+" noremap <silent> <F9> :source ~/.vim/session<CR>
+
+" Ctrl+S to save
+nmap <C-s> :write!<CR>
+imap <C-s> <C-o>:write!<CR>
+
+" Remove annoying default Ctrl+B behavior
+nmap <C-b> <nop>
+imap <C-b> <nop>
+
+" :w!! = write a file as sudo
+cmap W!! w !sudo tee % > /dev/null
+
+" Map _$ to trim whitespace on the end of lines
+function! Preserve(command)
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    execute a:command
+    let @/=_s
+    call cursor(l, c)
+endfun
+
+nmap <silent> _$ :call Preserve("%s/\\s\\+$//e")<CR><C-l>
+
+" Fix keys over some SSH connections
+inoremap <Esc>Oq 1
+inoremap <Esc>Or 2
+inoremap <Esc>Os 3
+inoremap <Esc>Ot 4
+inoremap <Esc>Ou 5
+inoremap <Esc>Ov 6
+inoremap <Esc>Ow 7
+inoremap <Esc>Ox 8
+inoremap <Esc>Oy 9
+inoremap <Esc>Op 0
+inoremap <Esc>On .
+inoremap <Esc>OR *
+inoremap <Esc>OQ /
+inoremap <Esc>Ol +
+inoremap <Esc>OS -
+
+noremap <Esc>OA <Up>
+noremap <Esc>OB <Down>
+
+noremap  <Esc>[1~ <Home>
+cnoremap <Esc>[1~ <Home>
+
+noremap  <Esc>[4~ <End>
+cnoremap <Esc>[4~ <End>
+inoremap <Esc>[4~ <End>
+
+"" Auto Commands
+
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
+
+if &compatible == 0
+    " Special vb template bind
+    au BufNewFile,BufRead */templates/*.html call s:template_binds()
+    function! s:template_binds()
+        let tmux=$TMUX
+        if tmux =~# "tmux"
+            setlocal makeprg=tmux\ split-window\ -v\ -l\ 5\ \"php\ ~/bin/update_templates.php\ %:p\ ;\ sleep\ 1\";tmux\ select-pane\ -U
+            nmap <buffer> <C-b> :silent make!\|redraw!<CR>
+            imap <buffer> <C-b> <C-o>:silent make!\|redraw!<CR>
+        else
+            setlocal makeprg=clear;php\ ~/bin/update_templates.php\ %:p
+            nmap <buffer> <C-b> :make!<CR>
+            imap <buffer> <C-b> <C-o>:make!<CR>
+        endif
+    endfun
+
+    au BufNewFile,BufRead *.twig call s:twig_settings()
+    function! s:twig_settings()
+        setlocal tabstop=2
+        setlocal softtabstop=2
+        setlocal shiftwidth=2
+        setlocal textwidth=0
+        let tmux=$TMUX
+        if tmux =~# "tmux"
+            setlocal makeprg=tmux\ split-window\ -v\ -l\ 5\ \"~/html/slickdeals/sdincludes/twig/compile_template.php\ %:p\ ;\ sleep\ 1\";tmux\ select-pane\ -U
+            nmap <buffer> <C-b> :silent make!\|redraw!<CR>
+            imap <buffer> <C-b> <C-o>:silent make!\|redraw!<CR>
+        else
+            setlocal makeprg=clear;php\ ~/html/slickdeals/sdincludes/twig/compile_template.php\ %:p
+            nmap <buffer> <C-b> :make!<CR>
+            imap <buffer> <C-b> <C-o>:make!<CR>
+        endif
+
+        nmap <buffer> <silent> C :TCommentAs twig<CR>
+        xmap <buffer> <silent> C :TCommentAs twig_block<CR>
+
+        setl foldmarker={#,#}
+        setl foldmethod=marker
+    endfun
+
+    au BufNewFile,BufRead *.yaml call s:yaml_settings()
+    function! s:yaml_settings()
+        call s:html_settings()
+        let b:SuperTabDefaultCompletionType = '<c-p>'
+    endfun
+
+    au BufNewFile,BufRead *.html call s:html_settings()
+    function! s:html_settings()
+        setlocal tabstop=2
+        setlocal softtabstop=2
+        setlocal shiftwidth=2
+        setlocal textwidth=0
+    endfun
+
+    au BufNewFile,BufRead *.php call s:php_binds()
+    function! s:php_binds()
+        let testdir = matchstr(expand('%:p'), 'html/tests/')
+        if testdir != ''
+            setlocal makeprg=cd\ ~/html/;clear;vendor/bin/phpunit\ -c\ tests\ %:p
+        else
+            setlocal makeprg=clear;php\ -f\ %:p
+        endif
+        nmap <buffer> <C-b> :make!<CR>
+        imap <buffer> <C-b> <C-o>:make!<CR>
+        setlocal keywordprg=pman
+        let b:SuperTabDefaultCompletionType        = "context"
+        let b:SuperTabContextDefaultCompletionType = "<c-x><c-u>"
+        let b:SuperTabContextTextOmniPrecedence    = ['&completefunc', '&omnifunc']
+        if &omnifunc != ''
+            call SuperTabChain(&omnifunc, "<c-p>")
+        endif
+    endfun
+endif
+
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+
+augroup resCur
+  autocmd!
+  autocmd BufRead * call ResCur()
+augroup END
+
+function! GitBufEnter()
+    if &filetype == "gitcommit"
+        call setpos('.', [0, 1, 24, 0])
+    endif
+    setl tw=0
+endfunction
+au BufEnter * call GitBufEnter()
+
+""" Custom Commands
+
+command! -nargs=1 Gget call RunGitGet(<f-args>)
+function! RunGitGet(ticket)
+    call VimuxRunCommand('clear ; git get ' . a:ticket . ' ; sleep 1 ; exit')
+endfunction
+
+command! Elog call RunElog()
+function! RunElog()
+    call VimuxRunCommand('elog')
+endfunction
+
+command! FixBraces call RunFixBraces()
+function! RunFixBraces()
+    call Preserve("%s/\\(\\S\\)\\s*{$/\\1\\r{/")
+endfun
+
+command! CodingStandards call RunCodingStandards()
+function! RunCodingStandards()
+    retab
+    call Preserve("%s/\\Cif(/if (/e")
+    call Preserve("%s/\\C}\\s*else/}\\relse/e")
+    call Preserve("%s/\\Cfor(/for (/e")
+    call Preserve("%s/\\Cswitch(/switch (/e")
+    call Preserve("%s/\\Celse if/elseif/e")
+    call Preserve("%s/\\Cforeach(/foreach (/e")
+    call Preserve("%s/\\Cwhile(/while (/e")
+    call Preserve("%s/\\Ccatch(/catch (/e")
+    call Preserve("%s/\\s\\+$//e")
+    call Preserve("%s/exit();/exit;/e")
+    call Preserve("%s/TRUE/true/ge")
+    call Preserve("%s/FALSE/false/ge")
+    call Preserve("g/=/s/NULL/null/e")
+    call Preserve("g/foreach/s/AS/as/e")
+    call Preserve("v/./,/./-j")
+    nohlsearch
+endfun
+
+
+""" Plugins
+
+" New JS/HTML indenting
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1  = "inc"
+
+" SmartHomeKey
+
+noremap  <silent> <Home> :SmartHomeKey<CR>
+inoremap <silent> <Home> <C-o>:SmartHomeKey<CR>
+noremap  <silent> [1~ :SmartHomeKey<CR>
+inoremap <silent> [1~ <C-o>:SmartHomeKey<CR>
+
+" TComment
+
+let g:tcomment_opleader1 = ''
+let g:tcomment_mapleader1 = ''
+let g:tcomment_mapleader2 = ''
+let g:tcomment#filetype#guess_php = 'php'
+
+" let g:tcommentGuessFileType_php = 'php'
+" let g:tcommentMapLeader1 = ''
+" let g:tcommentMapLeader2 = ''
+" let g:tcommentMapLeaderOp1 = ''
+" let g:tcommentMapLeaderOp2 = ''
+nmap <silent> C :TComment<CR>
+xmap <silent> C :TComment<CR>
+nmap <silent> <Leader>cs :TCommentAs sql<CR>
+xmap <silent> <Leader>cs :TCommentAs sql<CR>
+
+let g:tcomment_types = {
+            \ 'twig'           : '{# %s #}',
+            \ 'twig_block'     : '{#%s#}'
+            \ }
+" let g:tcommentGuessFileType_twig = 'twig'
+" let g:tcommentGuessFileType_htmltwig = 'twig'
+" let g:tcomment#filetype_map = {
+"             \ 'html.twig': 'twig',
+"             \ 'htmltwig': 'twig'
+"             \ }
+
+" Unite codesearch
+" nnoremap <silent> <Esc>f :Unite codesearch<CR>
+" nnoremap <silent> <Esc>g :exec "Unite -input=".expand("<cword>")." codesearch"<CR>
+
+let g:unite_enable_start_insert        = 1
+let g:unite_split_rule                 = "botright"
+let g:unite_force_overwrite_statusline = 0
+let g:unite_winheight                  = 30
+
+if exists("unite#custom#default_action")
+    call unite#custom#default_action('file', 'tabopen')
+endif
+
+" vim-javascript-syntax
+hi link javaScriptBraces Normal
+hi link javaScriptParens Normal
+hi link javaScriptEndColons Normal
+hi link javaScriptFuncKeyword Type
+hi link javaScriptIdentifier Special
+hi link javaScriptDOMObjects Normal
+hi link javaScriptDOMMethods Normal
+hi link javaScriptDOMProperties Normal
+hi link javaScriptHtmlElemProperties Normal
+hi link javaScriptLogicSymbols Normal
+
+" Tabularize
+
+nmap <silent> `= :Tabularize /^[^=]\+\zs=[&>]\?<CR>
+" xmap <silent> `= :Tabularize /^[^=]\+\zs=[&>]\?<CR>
+nmap <silent> `; :Tabularize /^[^:]\+\zs:<CR>
+" xmap <silent> `; :Tabularize /^[^:]\+\zs:<CR>
+nmap <silent> <Leader>t= :Tabularize /^[^=]\+\zs=[&>]\?<CR>
+xmap <silent> <Leader>t= :Tabularize /^[^=]\+\zs=[&>]\?<CR>
+nmap <silent> <Leader>t: :Tabularize /^[^:]\+\zs:<CR>
+xmap <silent> <Leader>t: :Tabularize /^[^:]\+\zs:<CR>
+
+" EasyAlign
+
+vmap <Enter> <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+
+xmap <silent> `= :EasyAlign =<CR>
+xmap <silent> `; :EasyAlign :<CR>
+
+" Command-T
+
+nnoremap <silent> <Esc>t :CommandT ~/html/<CR>
+nnoremap <silent> <A-t> :CommandT ~/html/<CR>
+
+let g:CommandTCancelMap               = ['<ESC>', '<C-c>']
+let g:CommandTSelectNextMap           = ['<ESC>OB']
+let g:CommandTSelectPrevMap           = ['<ESC>OA']
+let g:CommandTAcceptSelectionMap      = "<C-t>"
+let g:CommandTAcceptSelectionTabMap   = "<CR>"
+let g:CommandTAcceptSelectionSplitMap = "<C-s>"
+
+" set wildignore+=*/templates/MASTER/*.php
+
+let g:CommandTWildIgnore              = &wildignore
+            \ . ",*/Hybrid/Classic/*"
+            \ . ",*/Hybrid/Tablet/*"
+            \ . ",*/Hybrid/Ice/*"
+            \ . ",*/Hybrid/Midnight/*"
+            \ . ",*/phpunit/*"
+            \ . ",*/thttpd/*"
+            \ . ",*/trac/*"
+            \ . ",*/vendor/*"
+            \ . ",*/blog/*"
+            \ . ",*/bootstrap_assets/*"
+            \ . ",*/bower_components/*"
+            \ . ",*/d3js/*"
+            \ . ",*/external_libraries/*"
+            \ . ",*/extjs4/*"
+            \ . ",*/googleapi/*"
+            \ . ",*/node.js/*"
+            \ . ",*/node_modules/*"
+            \ . ",*/phpExcel/*"
+            \ . ",*/seo_report/*"
+            \ . ",*/twig/cache/*"
+            \ . ",*/xhprof/*"
+            \ . ",*/SD1.0/*"
+            \ . ",*/WAP1.0/*"
+            \ . ",*/css/compiled/*"
+            \ . ",*/cache/clientscript/*"
+            \ . ",*/cache/scripts/*"
+            " \ . ",*/templates/MASTER/*.php"
+            " \ . ",*/templates/MASTER/*"
+            " \ . ",*/templates/MASTER/*/*.php"
+
+" cs add ~/.cscope/cscope.out
+" set cspc=3
+
+if filereadable($HOME."/.config/vim/localrc")
+    source ~/.config/vim/localrc
+endif

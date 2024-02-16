@@ -1,0 +1,43 @@
+priority 50
+
+snippet block "twig block" b
+{% block ${1} %}
+	${2:${VISUAL}}
+{% endblock $1 %}
+endsnippet
+
+snippet eblock "empty twig block" b
+{% block ${1} %}{% endblock %}
+endsnippet
+
+snippet media "media macro include" b
+{% import 'macros/media.html.twig' as media %}
+endsnippet
+
+snippet js "twig javascripts" b
+{{ media.js([${1}]) }}
+endsnippet
+
+snippet css "twig stylesheets" b
+{{ media.css([${1}]) }}
+endsnippet
+
+snippet if "twig if" b
+{% if ${1} %}
+	${2:${VISUAL}}
+{% endif %}
+endsnippet
+
+snippet for "twig for" b
+{% for ${1} in ${2} %}
+	${3:${VISUAL}}
+{% endfor %}
+endsnippet
+
+snippet ext "twig extends" b
+{% extends "${1}" %}
+endsnippet
+
+snippet inc "twig include" b
+{% include "${1}" %}
+endsnippet

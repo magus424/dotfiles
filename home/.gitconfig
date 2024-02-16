@@ -1,0 +1,91 @@
+# vim: ts=4 noet ft=gitconfig
+
+[user]
+	name = Collin Grady
+	email = collin@collingrady.com
+	signingkey = ~/.ssh/id_ed25519.pub
+
+[core]
+	excludesfile = ~/.gitignore
+	autocrlf = input
+	safecrlf = warn
+	editor = vim
+	pager = delta
+
+[alias]
+	bb = !better-git-branch.sh
+	changes = diff --name-status -r
+	ci = commit
+	cia = commit --amend
+	co = checkout
+	diffstat = diff --stat -r
+	fp = push --force-with-lease
+	lg = log --pretty='format:%C(red)%h%C(auto)%d%C(reset) %s %C(cyan)(%ar)%C(reset)'
+	missing = lg HEAD..main
+	new = lg main..HEAD
+	rc = rebase --continue
+	save = stash save --keep-index
+	stdiff = diff --staged -w
+	st = status
+	sw = switch
+	swc = switch --force-create
+	um = fetch origin main:main
+	unstage = reset HEAD --
+
+[branch]
+	sort = -committerdate
+
+[color]
+	ui = true
+
+[commit]
+	gpgsign = true
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+[gpg]
+	format = ssh
+
+[init]
+	defaultBranch = main
+
+[interactive]
+	diffFilter = delta --color-only
+
+[log]
+	date = iso
+
+[merge]
+	conflictstyle = diff3
+	tool = vimdiff
+
+[push]
+	autoSetupRemote = true
+	default = simple
+
+[pull]
+	# TODO: re-evaluate this choice
+	rebase = false
+
+[rebase]
+	autostash = true
+
+[rerere]
+	enabled = true
+
+[delta]
+	file-decoration-style = "cyan ul"
+	file-style = "cyan"
+	hunk-header-decoration-style = "cyan box"
+	hunk-header-line-number-style = "cyan"
+	light = false
+	map-styles = "bold purple => 255 #330033, bold cyan => 255 #000033, bold yellow => 255 #333300"
+	minus-style = "255 #330000"
+	navigate = true    # use n and N to move between diff sections
+	plus-style = "255 #003300"
+	true-color = always
+
+[includeIf "gitdir:~/work/"]
+	path = ~/work/.gitconfig
