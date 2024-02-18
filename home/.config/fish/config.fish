@@ -15,6 +15,7 @@ set -x fish_color_operator cyan
 
 set -x NPM_TOKEN (gh auth token)
 
+set -x SHELL fish
 set -x RIPGREP_CONFIG_PATH ~/.ripgreprc
 set -x XDG_CONFIG_HOME ~/.config
 set -x POWERLINE_COMMAND ~/.config/vim/bundle/powerline/scripts/powerline-render
@@ -52,7 +53,7 @@ for p in ~/.config/vim/bundle/powerline/
     end
 end
 
-for p in ~/bin
+for p in $HOME/bin $HOME/.local/bin
     if test -d $p
         if not contains $p $PATH
             set PATH $p $PATH
@@ -69,6 +70,8 @@ complete -f -c git -n '__fish_git_using_command delbr' -a '(__fish_git_branches)
 complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 
 if test -d ~/.volta
-    set -gx VOLTA_HOME "$HOME/.volta"
-    set -gx PATH "$VOLTA_HOME/bin" $PATH
+    if test -z "$VOLTA_HOME"
+        set -gx VOLTA_HOME "$HOME/.volta"
+        set -gx PATH "$VOLTA_HOME/bin" $PATH
+    end
 end
