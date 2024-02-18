@@ -11,5 +11,3 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # vim: ts=4 sts=4 sw=4 et ai nowrap ft=sh
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"

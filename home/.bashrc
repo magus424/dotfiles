@@ -6,8 +6,11 @@
 #export DISPLAY
 
 # set PATH so it includes user's private bin if it exists
-if [ -d ~/bin ]; then
-    PATH=~/bin:"${PATH}"
+if [ -d $HOME/bin -a "$PATH" != *"$HOME/bin"* ]; then
+    PATH="$HOME/bin:${PATH}"
+fi
+if [ -d $HOME/.local/bin -a "$PATH" != *"$HOME/.local/bin"* ]; then
+    PATH="$HOME/.local/bin:${PATH}"
 fi
 
 # If running interactively, then:
@@ -85,19 +88,15 @@ if [ "$PS1" ]; then
         export PAGER=$HOME/bin/vimpager
     fi
 
-    # if [ -f $HOME/bin/gitpager ]; then
-    #     export GIT_PAGER=$HOME/bin/gitpager
-    # fi
-
-#    if [ -f ~/bin/rvm.sh -a -z "$rvm_bin_path" ]; then
-#        source ~/bin/rvm.sh
-#    fi
-
     if [[ -n $(which fish 2> /dev/null) ]]; then
         exec fish
     fi
 fi
 
 # vim: ts=4 sts=4 sw=4 et ai nowrap
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+if test -d ~/.volta; then
+    if test -z "$VOLTA_HOME"; then
+        export VOLTA_HOME="$HOME/.volta"
+        export PATH="$VOLTA_HOME/bin:$PATH"
+    fi
+fi
