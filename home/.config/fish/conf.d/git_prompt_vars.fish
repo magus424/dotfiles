@@ -24,9 +24,10 @@ set __fish_git_prompt_char_untrackedfiles '%'
 set __fish_git_prompt_showupstream informative
 set __fish_git_prompt_char_upstream_ahead '↑'
 set __fish_git_prompt_char_upstream_behind '↓'
-set __fish_git_prompt_char_upstream_diverged '<>'
-set __fish_git_prompt_char_upstream_equal '='
 set __fish_git_prompt_char_upstream_prefix ' ' # μυ
+# Only used in verbose?
+# set __fish_git_prompt_char_upstream_diverged '<>'
+# set __fish_git_prompt_char_upstream_equal '='
 
 set __fish_git_prompt_showcolorhints 1
 set __fish_git_prompt_color_upstream 0087FF
