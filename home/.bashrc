@@ -89,7 +89,9 @@ if [ "$PS1" ]; then
     fi
 
     if [[ -n $(which fish 2> /dev/null) ]]; then
-        exec fish
+        if [[ "$SHELL" != "fish" ]]; then
+            exec fish
+        fi
     fi
 fi
 
