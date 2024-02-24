@@ -4,6 +4,8 @@ else if test $TERM != 'putty-256color'
     set -x TERM xterm-256color
 end
 
+set -g fish_term24bit 1
+
 if type -f dircolors > /dev/null
     eval (dircolors -c | sed 's/>&\/dev\/null$//')
 end
