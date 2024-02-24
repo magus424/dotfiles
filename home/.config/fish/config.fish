@@ -71,6 +71,10 @@ complete -f -c git -n '__fish_git_using_command delbr' -a '(__fish_git_branches)
 # AWS CLI completion
 complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 
+if type -q zoxide
+    zoxide init fish | source
+end
+
 if test -d ~/.volta
     if test -z "$VOLTA_HOME"
         set -gx VOLTA_HOME "$HOME/.volta"
