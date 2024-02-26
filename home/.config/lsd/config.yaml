@@ -1,0 +1,12 @@
+classic: false
+dereference: false
+display: almost-all
+layout: oneline
+symlink-arrow: ->
+
+color:
+  when: auto
+  theme: custom
+
+sorting:
+  dir-grouping: first
