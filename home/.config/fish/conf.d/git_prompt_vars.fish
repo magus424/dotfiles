@@ -36,13 +36,14 @@ set __fish_git_prompt_showcolorhints 1
 # set __fish_git_prompt_color_upstream 0087FF
 set __fish_git_prompt_color_upstream 0087ff -b $git_bg
 set __fish_git_prompt_color_upstream_done -b $git_bg
-set __fish_git_prompt_color_dirtystate af0000 -b $git_bg
+set __fish_git_prompt_color_dirtystate red -b $git_bg
 # set __fish_git_prompt_color_invalidstate ??
-set __fish_git_prompt_color_stagedstate 00af00 -b $git_bg
-set __fish_git_prompt_color_untrackedfiles af5f00 -b $git_bg
-set __fish_git_prompt_color_branch 00af00 -b $git_bg
+set __fish_git_prompt_color_stagedstate green -b $git_bg
+set __fish_git_prompt_color_untrackedfiles yellow -b $git_bg
+set __fish_git_prompt_color_branch green -b $git_bg
 set __fish_git_prompt_color_branch_done -b $git_bg
-set __fish_git_prompt_color_branch_detached D70000      # (red) the color of the branch if it’s detached (e.g. a commit is checked out)
+set __fish_git_prompt_color_branch_detached purple
+
 # set __fish_git_prompt_color_branch_dirty ??           # (no default) the color of the branch if it’s dirty and not detached
 # set __fish_git_prompt_color_branch_staged ??          # (no default) the color of the branch if it just has something staged and is otherwise clean
 # set __fish_git_prompt_color_flags ??                  # (--bold blue) - the default color for dirty/staged/stashed/untracked state

@@ -38,6 +38,9 @@
 [color]
 	ui = true
 
+[color "status"]
+	untracked = yellow
+
 [commit]
 	gpgsign = true
 
