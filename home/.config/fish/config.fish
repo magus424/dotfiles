@@ -7,7 +7,11 @@ end
 set -g fish_term24bit 1
 
 if type -f dircolors > /dev/null
-    eval (dircolors -c | sed 's/>&\/dev\/null$//')
+    if test -f ~/.config/dircolors
+        eval (dircolors -c ~/.config/dircolors | sed 's/>&\/dev\/null$//')
+    else
+        eval (dircolors -c | sed 's/>&\/dev\/null$//')
+    end
 end
 
 set -x fish_color_command blue --bold

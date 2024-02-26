@@ -76,6 +76,10 @@ if [ "$PS1" ]; then
     fi
     export PATH PS1 PROMPT_COMMAND
 
+    if [[ -f ~/.config/dircolors ]]; then
+        eval "$(dircolors -b ~/.config/dircolors)"
+    fi
+
     if [ -f /etc/bash_completion ]; then
         . /etc/bash_completion
     fi
