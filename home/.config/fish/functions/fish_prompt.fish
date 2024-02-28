@@ -9,9 +9,12 @@ function __my_git_prompt
         set git_desc_prompt (__my_git_desc_prompt)
         set git_desc_length (string length -V "$git_desc_prompt")
 
-        __my_git_branch_prompt
-        if test -n "$git_desc_prompt" -a $COLUMNS -gt (math $git_desc_length + 20)
-            __my_git_desc_prompt
+        set git_branch_prompt (__my_git_branch_prompt)
+        set git_branch_length (string length -V "$git_branch_prompt")
+
+        echo -n $git_branch_prompt
+        if test -n "$git_desc_prompt" -a $COLUMNS -gt (math $git_branch_length + $git_desc_length + 10)
+            echo -n $git_desc_prompt
         end
     end
 end
