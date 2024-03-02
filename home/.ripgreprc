@@ -22,6 +22,8 @@ vue:*.vue
 --glob=!LoadStaticDataCommand.php
 --glob=!bootstrap_assets/
 --glob=!braintree-data-collector.js
+--glob=!browscap.ini
+--glob=!banned_merchants.csv
 --glob=!ckeditor
 --glob=!datastore.sql
 --glob=!datastore_options.sql
