@@ -3,7 +3,7 @@ function __my_git_prompt
     set -l git_status $status
 
     if test $git_status -eq 0
-        set git_branch (git rev-parse --abbrev-ref HEAD)
+        set git_branch (git rev-parse --abbrev-ref HEAD 2>/dev/null)
         set git_description (git config branch.$git_branch.description)
 
         set git_desc_prompt (__my_git_desc_prompt)
@@ -43,7 +43,7 @@ function __my_git_desc_prompt
     set icon_file \uf4a5            # 
     set nbsp \ua0
 
-    set git_branch (git rev-parse --abbrev-ref HEAD)
+    set git_branch (git rev-parse --abbrev-ref HEAD 2>/dev/null)
     set git_description (git config branch.$git_branch.description)
 
     set desc_bg 201030
