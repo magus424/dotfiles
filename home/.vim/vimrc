@@ -460,9 +460,6 @@ nnoremap <silent> // :noh<CR>
 nnoremap <Space> za
 xnoremap <Space> za
 
-" Ctrl+L to insert =>
-inoremap <C-l> <Space>=><Space>
-
 " upper/lower word
 nmap <leader>U m`gUiw``
 nmap <leader>L m`guiw``
