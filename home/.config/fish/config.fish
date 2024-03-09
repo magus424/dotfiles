@@ -21,6 +21,7 @@ set -x fish_color_operator cyan
 
 set -x NPM_TOKEN (gh auth token)
 
+set -x HOMEBREW_NO_ENV_HINTS 1
 set -x SHELL fish
 set -x RIPGREP_CONFIG_PATH ~/.ripgreprc
 set -x XDG_CONFIG_HOME ~/.config
@@ -55,6 +56,14 @@ for p in ~/.config/vim/bundle/powerline/
     if test -d $p
         if not contains $p $PYTHONPATH
             set PYTHONPATH $p $PYTHONPATH
+        end
+    end
+end
+
+for p in /home/linuxbrew/.linuxbrew/share/fish/vendor_completions.d
+    if test -d $p
+        if not contains $p $fish_complete_path
+            set fish_complete_path $p $fish_complete_path
         end
     end
 end

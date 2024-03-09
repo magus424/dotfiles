@@ -12,3 +12,10 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Install TPM
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+
+# Install homebrew
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+brew bundle install --file=~/.config/Brewfile
