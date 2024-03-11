@@ -19,27 +19,6 @@ set -x fish_color_end green
 set -x fish_color_escape cyan
 set -x fish_color_operator cyan
 
-set -x NPM_TOKEN (gh auth token)
-
-set -x HOMEBREW_NO_ENV_HINTS 1
-set -x SHELL fish
-set -x RIPGREP_CONFIG_PATH ~/.ripgreprc
-set -x XDG_CONFIG_HOME ~/.config
-set -x POWERLINE_COMMAND ~/.config/vim/bundle/powerline/scripts/powerline-render
-set -x WHOIS_HIDE 1
-set -x EDITOR vim
-set -e GREP_OPTIONS
-set -x GREP_COLOR "1;33"
-set -x ACK_COLOR_MATCH "bold yellow"
-if test -e ~/bin/vimpager
-    set -x PAGER ~/bin/vimpager
-end
-set -x XDEBUG_SESSION 1
-
-if type -q thefuck
-    thefuck --alias | source
-end
-
 if test -f ~/.homesick/repos/homeshick/homeshick.fish
     source ~/.homesick/repos/homeshick/homeshick.fish
 end
@@ -78,6 +57,35 @@ end
 
 if test -d /home/linuxbrew/.linuxbrew
     eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+    set -x HOMEBREW_NO_ENV_HINTS 1
+end
+
+if test -d ~/.volta
+    if test -z "$VOLTA_HOME"
+        set -gx VOLTA_HOME "$HOME/.volta"
+        set -gx PATH "$VOLTA_HOME/bin" $PATH
+    end
+end
+
+set -x NPM_TOKEN (gh auth token)
+
+set -x SHELL fish
+set -x RIPGREP_CONFIG_PATH ~/.ripgreprc
+set -x XDG_CONFIG_HOME ~/.config
+set -x POWERLINE_COMMAND ~/.config/vim/bundle/powerline/scripts/powerline-render
+set -x WHOIS_HIDE 1
+set -x EDITOR vim
+set -e GREP_OPTIONS
+set -x GREP_COLOR "1;33"
+set -x ACK_COLOR_MATCH "bold yellow"
+
+if test -e ~/bin/vimpager
+    set -x PAGER ~/bin/vimpager
+end
+
+if type -q thefuck
+    thefuck --alias | source
 end
 
 complete -f -c git -n '__fish_git_needs_command' -a get -d 'Checkout and switch to a branch'
@@ -90,11 +98,4 @@ complete --command aws --no-files --arguments '(begin; set --local --export COMP
 
 if type -q zoxide
     zoxide init fish | source
-end
-
-if test -d ~/.volta
-    if test -z "$VOLTA_HOME"
-        set -gx VOLTA_HOME "$HOME/.volta"
-        set -gx PATH "$VOLTA_HOME/bin" $PATH
-    end
 end
