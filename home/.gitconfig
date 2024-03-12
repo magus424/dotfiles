@@ -90,5 +90,8 @@
 	plus-style = "255 #003300"
 	true-color = always
 
+[include]
+	path = ~/.local.gitconfig
+
 [includeIf "gitdir:~/work/"]
 	path = ~/work/.gitconfig
