@@ -80,9 +80,14 @@ set -e GREP_OPTIONS
 set -x GREP_COLOR "1;33"
 set -x ACK_COLOR_MATCH "bold yellow"
 
-if test -e ~/bin/vimpager
-    set -x PAGER ~/bin/vimpager
+if type -q bat
+    set -x MANPAGER "sh -c 'col -b | bat -l man -p'"
+    set -x PAGER "bat -p"
 end
+
+# if test -e ~/bin/vimpager
+#     set -x PAGER ~/bin/vimpager
+# end
 
 if type -q thefuck
     thefuck --alias | source
