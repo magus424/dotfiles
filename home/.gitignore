@@ -12,7 +12,9 @@ Session.vim
 
 # vscode project files
 *.code-workspace
-.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 
 # OS generated files
 desktop.ini
