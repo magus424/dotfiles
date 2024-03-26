@@ -30,7 +30,7 @@
 	sw = switch
 	swc = switch --force-create
 	um = fetch origin main:main
-	unstage = rm -r --cached
+	unstage = restore --staged
 
 [branch]
 	sort = -committerdate
