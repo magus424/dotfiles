@@ -1,4 +1,4 @@
 #!/bin/bash
 
-git branch --merged main | grep -v "main" | xargs -n 1 git branch -d
-# git branch --merged master | grep -v "master" | xargs -n 1 echo
+git branch --merged main | grep -v "main" | grep -v "*" | xargs -n 1 git branch -d
+# git branch --merged main | grep -v "main" | grep -v "*" | xargs -n 1 echo
