@@ -63,10 +63,6 @@ end
 function fish_prompt --description 'Write out the prompt'
     echo
 
-    # if test $fish_term24bit -eq 0
-    #     echo "24bit unset"
-    # end
-
     if test -n "$TMUX"
         fixssh
     end
@@ -75,11 +71,19 @@ function fish_prompt --description 'Write out the prompt'
     set icon_folder \uf07b          # 
     set icon_half_left \ue0b6       # 
     set icon_half_right \ue0b4      # 
+    set icon_cloud \uf0c2           # 
 
     set pwd_fg 5f5fff
     set pwd_bg 101030
 
-    set main_prompt (set_color $pwd_bg)$icon_half_left(set_color -b $pwd_bg $pwd_fg)$icon_folder\ua0(prompt_pwd_long)(set_color -b normal $pwd_bg)$icon_half_right
+    set aws_status (__fish_aws_sso_login_status)
+    if test "active" = "$aws_status"
+        set aws_prompt (set_color 080)"$icon_cloud "(set_color normal)
+    else if test "expired" = "$aws_status"
+        set aws_prompt (set_color 800)"$icon_cloud "(set_color normal)
+    end
+
+    set main_prompt $aws_prompt(set_color $pwd_bg)$icon_half_left(set_color -b $pwd_bg $pwd_fg)$icon_folder\ua0(prompt_pwd_long)(set_color -b normal $pwd_bg)$icon_half_right
     set main_length (string length -V $main_prompt)
     if test $COLUMNS -lt (math $main_length + 5)
         set main_prompt (set_color 0BB)(hostname -s)(set_color 555):(set_color 55F)(prompt_pwd)(set_color normal)
