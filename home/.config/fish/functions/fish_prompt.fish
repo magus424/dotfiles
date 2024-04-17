@@ -76,6 +76,7 @@ function fish_prompt --description 'Write out the prompt'
     set pwd_fg 5f5fff
     set pwd_bg 101030
 
+    set aws_prompt ''
     set aws_status (__fish_aws_sso_login_status)
     if test "active" = "$aws_status"
         set aws_prompt (set_color 080)"$icon_cloud "(set_color normal)
