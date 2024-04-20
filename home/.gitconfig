@@ -28,7 +28,7 @@
 	stdiff = diff --staged -w
 	st = status
 	sw = switch
-	swc = switch --force-create
+	swc = switch --create
 	um = fetch origin main:main
 	unstage = restore --staged
 
