@@ -80,8 +80,8 @@ function fish_prompt --description 'Write out the prompt'
     set aws_status (__fish_aws_sso_login_status)
     if test "active" = "$aws_status"
         set aws_prompt (set_color 080)"$icon_cloud "(set_color normal)
-    else if test "expired" = "$aws_status"
-        set aws_prompt (set_color 800)"$icon_cloud "(set_color normal)
+    # else if test "expired" = "$aws_status"
+    #     set aws_prompt (set_color 800)"$icon_cloud "(set_color normal)
     end
 
     set main_prompt $aws_prompt(set_color $pwd_bg)$icon_half_left(set_color -b $pwd_bg $pwd_fg)$icon_folder\ua0(prompt_pwd_long)(set_color -b normal $pwd_bg)$icon_half_right
