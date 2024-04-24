@@ -31,6 +31,7 @@
 	swc = switch --create
 	um = fetch origin main:main
 	unstage = restore --staged
+	blm = blame -M
 
 [branch]
 	sort = -committerdate
