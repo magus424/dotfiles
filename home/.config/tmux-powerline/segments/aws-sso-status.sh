@@ -3,11 +3,7 @@
 run_segment() {
     cloud="\uf0c2"
 
-    if ! test -f /tmp/tmux-aws-status.txt; then
-        touch /tmp/tmux-aws-status.txt
-    fi
-
-    if test `find /tmp/tmux-aws-status.txt -mmin +5`; then
+    if ! test -f /tmp/tmux-aws-status.txt || test `find /tmp/tmux-aws-status.txt -mmin +5`; then
         aws sts get-caller-identity --query Account --output text 2> /dev/null
         if [[ $? -eq 0 ]]; then
             echo "active" > /tmp/tmux-aws-status.txt
