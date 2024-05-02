@@ -6,13 +6,23 @@ end
 
 set -g fish_term24bit 1
 
-if type -f dircolors > /dev/null
+# if type -f dircolors > /dev/null
+if command_exists dircolors
     if test -f ~/.config/dircolors
         eval (dircolors -c ~/.config/dircolors | sed 's/>&\/dev\/null$//')
     else
         eval (dircolors -c | sed 's/>&\/dev\/null$//')
     end
 end
+
+abbr --add dcd docker compose down
+abbr --add dce docker compose exec
+abbr --add dcr docker compose restart
+abbr --add dcu docker compose up
+
+abbr --add hcd homeshick cd
+abbr --add hln homeshick link
+abbr --add htrack homeshick track
 
 set -x fish_color_command blue --bold
 set -x fish_color_end green
@@ -21,14 +31,7 @@ set -x fish_color_operator cyan
 
 if test -f ~/.homesick/repos/homeshick/homeshick.fish
     source ~/.homesick/repos/homeshick/homeshick.fish
-end
-
-for p in /home/vagrant/.local/lib ~/.local/lib64
-    if test -d $p
-        if not contains $p $LD_LIBRARY_PATH
-            set -x LD_LIBRARY_PATH "$p:$LD_LIBRARY_PATH"
-        end
-    end
+    source ~/.homesick/repos/homeshick/completions/homeshick.fish
 end
 
 for p in ~/.config/vim/bundle/powerline/
@@ -47,13 +50,9 @@ for p in /home/linuxbrew/.linuxbrew/share/fish/vendor_completions.d
     end
 end
 
-for p in $HOME/bin $HOME/.local/bin
-    if test -d $p
-        if not contains $p $PATH
-            set PATH $p $PATH
-        end
-    end
-end
+add_path_if_exists $HOME/bin
+add_path_if_exists $HOME/.local/bin
+add_path_if_exists /usr/local/bin
 
 if test -d /home/linuxbrew/.linuxbrew
     eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -85,11 +84,7 @@ if type -q bat
     set -x PAGER "bat -p"
 end
 
-# if test -e ~/bin/vimpager
-#     set -x PAGER ~/bin/vimpager
-# end
-
-if type -q thefuck
+if command_exists thefuck
     thefuck --alias | source
 end
 
@@ -101,6 +96,6 @@ complete -f -c git -n '__fish_git_using_command delbr' -a '(__fish_git_branches)
 # AWS CLI completion
 complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 
-if type -q zoxide
+if command_exists zoxide
     zoxide init fish | source
 end

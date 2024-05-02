@@ -1,5 +1,5 @@
 function ls --description 'List contents of directory'
-    if type -q lsd
+    if command_exists lsd
         set -l param -l
         command lsd $param $argv
     else
