@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 update_aws_status() {
-    aws sts get-caller-identity --query Account --output text 2> /dev/null
+    aws sts get-caller-identity --query Account --output text 2>&1 > /dev/null
     if [[ $? -eq 0 ]]; then
         echo "active" > /tmp/tmux-aws-status.txt
     else

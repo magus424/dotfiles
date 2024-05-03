@@ -23,6 +23,7 @@ abbr --add dcu docker compose up
 abbr --add hcd homeshick cd
 abbr --add hln homeshick link
 abbr --add htrack homeshick track
+abbr --add hpull homeshick pull
 
 set -x fish_color_command blue --bold
 set -x fish_color_end green
