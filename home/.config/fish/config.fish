@@ -1,3 +1,12 @@
+__fish_ssh_start_agent
+__fish_ssh_add_all_keys
+
+if test -d /home/linuxbrew/.linuxbrew
+    eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+    set -x HOMEBREW_NO_ENV_HINTS 1
+end
+
 add_path_if_exists $HOME/bin
 add_path_if_exists $HOME/.local/bin
 add_path_if_exists /usr/local/bin
@@ -6,10 +15,10 @@ add_pythonpath_if_exists ~/.config/vim/bundle/powerline/
 
 set -g fish_term24bit 1
 
-set -x fish_color_command blue --bold
-set -x fish_color_end green
-set -x fish_color_escape cyan
-set -x fish_color_operator cyan
+set fish_color_command blue --bold
+set fish_color_end green
+set fish_color_escape cyan
+set fish_color_operator cyan
 
 set -e GREP_OPTIONS
 
@@ -39,12 +48,6 @@ if test -f ~/.homesick/repos/homeshick/homeshick.fish
     abbr --add hln homeshick link
     abbr --add htrack homeshick track
     abbr --add hpull homeshick pull
-end
-
-if test -d /home/linuxbrew/.linuxbrew
-    eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-    set -x HOMEBREW_NO_ENV_HINTS 1
 end
 
 if test -d ~/.volta
