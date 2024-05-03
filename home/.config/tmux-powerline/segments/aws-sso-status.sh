@@ -19,9 +19,9 @@ run_segment() {
     status=`cat /tmp/tmux-aws-status.txt`
 
     if [[ "$status" == "active" ]]; then
-        echo -e "#[fg=#008000]${cloud}"
+        echo -e "#[fg=#008000]${cloud} "
     else
-        echo -e "#[fg=#800000]${cloud}"
+        echo -e "#[fg=#800000]${cloud} "
     fi
 
     return 0

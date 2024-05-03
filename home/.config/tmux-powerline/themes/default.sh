@@ -1,5 +1,4 @@
-# Default Theme
-# If changes made here does not take effect, then try to re-create the tmux session to force reload.
+# vim: ft=bash
 
 if patched_font_in_use; then
     TMUX_POWERLINE_SEPARATOR_LEFT_BOLD=""
@@ -29,7 +28,8 @@ TMUX_POWERLINE_WINDOW_STATUS_CURRENT=(
     " #I " \
     "$TMUX_POWERLINE_SEPARATOR_RIGHT_THIN" \
     "#[fg=colour255,bold]" \
-    " #W " \
+    " #W" \
+    "#{?window_zoomed_flag, ,} " \
     "#[fg=colour24,bg=colour234,nobold]" \
     "$TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD"
 )
@@ -66,7 +66,7 @@ TMUX_POWERLINE_WINDOW_STATUS_STYLE="#[fg=colour248,nobold]"
 #   * - any other character/string produces no change to default behavior
 #
 # Example segment with separator disabled and right space character disabled:
-# "hostname 33 0 {TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD} 33 0 right_disable separator_disable"
+# "hostname 33 0 ${TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD} 33 0 right_disable separator_disable"
 #
 # Note that although redundant the non_default_separator, separator_background_color and
 # separator_foreground_color options must still be specified so that appropriate index
@@ -75,36 +75,14 @@ TMUX_POWERLINE_WINDOW_STATUS_STYLE="#[fg=colour248,nobold]"
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
     TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
         "tmux_session_info 148 234" \
-        "aws-sso-status #232f3e 0" \
-        # "hostname 33 0" \
-        #"ifstat 30 255" \
-        #"ifstat_sys 30 255" \
-        # "lan_ip 24 255 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
-        # "wan_ip 24 255" \
+        "aws-sso-status #232f3e 0 ${TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD} #232f3e 0 right_disable"
     )
 fi
 
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
     TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-        "dotfiles-status #006600 255" \
-        "dotfiles-work-status #0072bc 255"
-        # "vcs_branch 29 88" \
-        # "vcs_compare 60 255" \
-        # "vcs_staged 64 255" \
-        # "vcs_modified 9 255" \
-        # "vcs_others 245 0" \
-        # "earthquake 3 0" \
-        # "pwd 89 211" \
-        # "now_playing 234 37" \
-        # "cpu 240 136" \
-        # "load 237 167" \
-        # "tmux_mem_cpu_load 234 136" \
-        # "weather 37 255"
-        # "rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}" \
-        # "xkb_layout 125 117" \
-        # "date_day 235 136" \
-        # "date 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
-        # "time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
-        # "utc_time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
+        # "aws-sso-status #232f3e 0" \
+        "dotfiles-status #006600 254" \
+        "dotfiles-work-status #0072bc 254"
     )
 fi
