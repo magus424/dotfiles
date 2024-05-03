@@ -1,20 +1,19 @@
+# vim: ts=4 sts=4 sw=4 et ai nowrap ft=bash
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-#DISPLAY="192.168.1.100:0.0"
-#export DISPLAY
-
-# set PATH so it includes user's private bin if it exists
-if [ -d $HOME/bin -a "$PATH" != *"$HOME/bin"* ]; then
-    PATH="$HOME/bin:${PATH}"
-fi
-if [ -d $HOME/.local/bin -a "$PATH" != *"$HOME/.local/bin"* ]; then
-    PATH="$HOME/.local/bin:${PATH}"
-fi
-
 # If running interactively, then:
 if [ "$PS1" ]; then
+    # set PATH so it includes user's private bin if it exists
+    if [ -d $HOME/bin -a "$PATH" != *"$HOME/bin"* ]; then
+        PATH="$HOME/bin:${PATH}"
+    fi
+    if [ -d $HOME/.local/bin -a "$PATH" != *"$HOME/.local/bin"* ]; then
+        PATH="$HOME/.local/bin:${PATH}"
+    fi
+
     HISTCONTROL=ignoredups
     HISTSIZE=8192
     WHOIS_HIDE=1
@@ -91,15 +90,8 @@ if [ "$PS1" ]; then
     if [[ -f $HOME/bin/vimpager ]]; then
         export PAGER=$HOME/bin/vimpager
     fi
-
-    if [[ -n $(which fish 2> /dev/null) ]]; then
-        if [[ "$SHELL" != "fish" ]]; then
-            exec fish
-        fi
-    fi
 fi
 
-# vim: ts=4 sts=4 sw=4 et ai nowrap
 if test -d ~/.volta; then
     if test -z "$VOLTA_HOME"; then
         export VOLTA_HOME="$HOME/.volta"
