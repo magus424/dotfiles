@@ -77,6 +77,10 @@ if command_exists docker
     abbr --add dcu docker compose up
 end
 
+if command_exists kubectl
+    abbr --add k kubectl
+end
+
 if command_exists thefuck
     thefuck --alias | source
 end
