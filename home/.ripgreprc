@@ -8,6 +8,9 @@ web:*.{html,scss,js,php,ts,vue}*
 --type-add
 vue:*.vue
 
+--type-add
+conf:*.conf
+
 --colors=path:fg:green
 --colors=path:style:bold
 
