@@ -80,6 +80,7 @@ end
 
 if command_exists kubectl
     abbr --add k kubectl
+    abbr --add kns kubectl config set-context --current --namespace
 end
 
 if command_exists thefuck
