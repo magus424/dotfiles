@@ -60,7 +60,7 @@ end
 if command_exists bat
     set -x MANPAGER "sh -c 'col -b | bat -l man -p'"
     set -x PAGER "bat -p"
-    abbr --add bat cat
+    abbr --add cat bat
 end
 
 if command_exists dircolors
