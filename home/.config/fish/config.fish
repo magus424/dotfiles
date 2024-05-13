@@ -78,6 +78,10 @@ if command_exists docker
     abbr --add dcu docker compose up
 end
 
+if command_exists fzf
+    fzf --fish | source
+end
+
 if command_exists kubectl
     abbr --add k kubectl
     abbr --add kns kubectl config set-context --current --namespace
