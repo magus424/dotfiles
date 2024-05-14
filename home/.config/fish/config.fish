@@ -58,6 +58,7 @@ if test -d ~/.volta
 end
 
 if command_exists bat
+    set -x DELTA_PAGER "less -R"
     set -x MANPAGER "sh -c 'col -b | bat -l man -p'"
     set -x PAGER "bat -p"
     abbr --add cat bat
