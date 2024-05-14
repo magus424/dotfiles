@@ -80,6 +80,8 @@ if command_exists docker
 end
 
 if command_exists fzf
+    set -x FZF_TMUX_OPTS '-p80%,60%'
+
     fzf --fish | source
 end
 

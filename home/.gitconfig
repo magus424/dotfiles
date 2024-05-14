@@ -32,6 +32,8 @@
 	um = fetch origin main:main
 	unstage = restore --staged
 	blm = blame -M
+	fnew = !git new --color=always | fzf --ansi --disabled --preview-window 'up,90%' --preview 'git show {1} | delta' --bind 'q:abort'
+	fmissing = !git missing --color=always | fzf --ansi --disabled --preview-window 'up,90%' --preview 'git show {1} | delta' --bind 'q:abort'
 
 [branch]
 	sort = -committerdate
