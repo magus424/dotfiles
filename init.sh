@@ -19,3 +19,5 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/in
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 brew bundle install --file=~/.config/Brewfile
+
+bat cache --build

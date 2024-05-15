@@ -32,8 +32,8 @@
 	um = fetch origin main:main
 	unstage = restore --staged
 	blm = blame -M
-	fnew = !git new --color=always | fzf --ansi --disabled --preview-window 'up,90%' --preview 'git show {1} | delta' --bind 'q:abort'
-	fmissing = !git missing --color=always | fzf --ansi --disabled --preview-window 'up,90%' --preview 'git show {1} | delta' --bind 'q:abort'
+	fnew = !git new --color=always | fzf --ansi --disabled --preview-window 'right,50%' --preview 'git show {1} | delta' --bind 'q:abort'
+	fmissing = !git missing --color=always | fzf --ansi --disabled --preview-window 'right,50%' --preview 'git show {1} | delta' --bind 'q:abort'
 
 [branch]
 	sort = -committerdate
@@ -83,15 +83,16 @@
 	enabled = true
 
 [delta]
+	syntax-theme = "Monokai (SL)"
 	file-decoration-style = "cyan ul"
 	file-style = "cyan"
 	hunk-header-decoration-style = "cyan box"
 	hunk-header-line-number-style = "cyan"
 	light = false
-	map-styles = "bold purple => 255 #330033, bold cyan => 255 #000033, bold yellow => 255 #333300"
-	minus-style = "255 #330000"
+	map-styles = "bold purple => syntax #330033, bold cyan => syntax #000033, bold yellow => syntax #333300"
+	minus-style = "syntax #330000"
 	navigate = true    # use n and N to move between diff sections
-	plus-style = "255 #003300"
+	plus-style = "syntax #003300"
 	true-color = always
 
 [include]
