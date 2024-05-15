@@ -1,13 +1,13 @@
 function __kf_context
     kubectl config get-contexts | \
-        fzf-tmux $FZF_TMUX_OPTS \
+        fzf-tmux -d7 \
             --header-lines=1 \
             --bind 'enter:become(kubectl config use-context {2})'
 end
 
 function __kf_namespace
     kubectl get namespaces | \
-        fzf-tmux $FZF_TMUX_OPTS \
+        fzf-tmux -p 50,30 \
             --header-lines=1 \
             --bind 'enter:become(kubectl config set-context --current --namespace={1})'
 end
