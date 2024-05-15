@@ -66,6 +66,11 @@ if has("autocmd")
     au BufEnter Debugger* setlocal scrolloff=0
 endif
 
+let g:python3_host_prog = "/home/linuxbrew/.linuxbrew/bin/python3"
+let g:loaded_node_provider = 0
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
+
 " Highlight conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 

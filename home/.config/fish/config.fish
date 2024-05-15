@@ -34,7 +34,9 @@ set -x SHELL fish
 set -x WHOIS_HIDE 1
 set -x XDG_CONFIG_HOME ~/.config
 
-if test $TERM = 'screen' -o $TERM = 'screen-bce'
+if test -n "$TMUX"
+    set -x TERM tmux-256color
+else if test $TERM = 'screen' -o $TERM = 'screen-bce'
     set -x TERM screen-256color
 else if test $TERM != 'putty-256color'
     set -x TERM xterm-256color
