@@ -83,6 +83,22 @@ end
 
 if command_exists fzf
     set -x FZF_TMUX_OPTS '-p80%,60%'
+    set -x FZF_CTRL_T_OPTS "
+        --walker-skip .git,node_modules
+        --preview 'bat -n --color=always {}'
+    "
+    set -x FZF_CTRL_R_OPTS "
+        --preview 'echo {}'
+        --preview-window up:8:wrap
+        --bind 'ctrl-/:toggle-preview'
+        --bind 'ctrl-y:execute-silent(echo -n {1..} | xsel -b)+abort'
+        --color header:italic
+        --header 'Press CTRL-Y to copy command into clipboard'""
+    "
+    set -x FZF_ALT_C_OPTS "
+        --walker-skip .git,node_modules
+        --preview 'command lsd --tree {}'
+    "
 
     fzf --fish | source
 end
