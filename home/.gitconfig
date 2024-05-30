@@ -22,7 +22,7 @@
 	fp = push --force-with-lease
 	lg = log --pretty='format:%C(red)%h%C(auto)%d%C(reset) %s %C(cyan)(%ar)%C(reset)'
 	missing = lg HEAD..main
-	new = lg main..HEAD
+	new = lg main..HEAD --reverse
 	rc = rebase --continue
 	save = stash save --keep-index
 	stdiff = diff --staged -w
