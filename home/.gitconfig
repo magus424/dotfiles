@@ -35,6 +35,7 @@
 	fnew = !git new --color=always | fzf --ansi --disabled --preview-window 'right,50%' --preview 'git show {1} | delta' --bind 'q:abort'
 	fmissing = !git missing --color=always | fzf --ansi --disabled --preview-window 'right,50%' --preview 'git show {1} | delta' --bind 'q:abort'
 	flog = !git lg --color=always | fzf --ansi --preview-window 'right,50%' --preview 'git show {1} | delta'
+	pf = pull --ff
 
 [branch]
 	sort = -committerdate
