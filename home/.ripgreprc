@@ -42,6 +42,7 @@ conf:*.conf
 --glob=!prebid-v4*.js
 --glob=!prebid-v7*.js
 --glob=!pushnotification_cleanup_android_uninstall.php
+--glob=!src/Migrations/*/*.php
 --glob=!**/templates/MASTER/**.php
 --glob=!testReactApp
 --glob=!thttpd/
