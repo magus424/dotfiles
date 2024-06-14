@@ -14,8 +14,8 @@ end
 
 
 function __ssh_agent_start -d "start a new ssh agent"
-    set -gx --erase SSH_AGENT_PID
-    set -gx --erase SSH_AUTH_SOCK
+    set -g --erase SSH_AGENT_PID
+    set -g --erase SSH_AUTH_SOCK
     ssh-agent -c | sed 's/^echo/#echo/' > $SSH_ENV
     chmod 600 $SSH_ENV
     source $SSH_ENV > /dev/null
