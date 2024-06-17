@@ -25,7 +25,6 @@ set fish_color_operator cyan
 set -e GREP_OPTIONS
 
 set -x ACK_COLOR_MATCH "bold yellow"
-set -x EDITOR vim
 set -x GREP_COLOR "mt=1;33"
 set -x NPM_TOKEN (gh auth token)
 set -x POWERLINE_COMMAND ~/.config/vim/bundle/powerline/scripts/powerline-render
@@ -106,6 +105,12 @@ end
 if command_exists kubectl
     abbr --add k kubectl
     abbr --add kns kubectl config set-context --current --namespace
+end
+
+if command_exists nvim
+    set -x EDITOR nvim
+else
+    set -x EDITOR vim
 end
 
 if command_exists thefuck
