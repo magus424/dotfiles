@@ -2,11 +2,11 @@
 
 if [ "$PS1" ]; then
     stty -ixon
-    if [[ -n $(which fish 2> /dev/null) ]]; then
-        if [[ "$SHELL" != "fish" ]]; then
-            exec fish
-        fi
-    fi
+#    if [[ -n $(which fish 2> /dev/null) ]]; then
+#        if [[ "$SHELL" != "fish" ]]; then
+#            exec fish
+#        fi
+#    fi
 fi
 
 if [ -f ~/.bashrc ]; then
