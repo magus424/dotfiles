@@ -1,6 +1,6 @@
 function __kf_context
-    kubectl config get-contexts | \
-        fzf-tmux -d7 \
+    kubectl config get-contexts -o name | \
+        fzf-tmux -p 85,30 \
             --header-lines=1 \
             --bind 'enter:become(kubectl config use-context {2})'
 end
