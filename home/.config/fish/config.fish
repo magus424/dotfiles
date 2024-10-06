@@ -26,6 +26,7 @@ set -e GREP_OPTIONS
 
 set -x ACK_COLOR_MATCH "bold yellow"
 # set -x GREP_COLOR "1;33"
+set -x GH_NO_UPDATE_NOTIFIER 1
 set -x NPM_TOKEN (gh auth token)
 set -x POWERLINE_COMMAND ~/.config/vim/bundle/powerline/scripts/powerline-render
 set -x RIPGREP_CONFIG_PATH ~/.ripgreprc

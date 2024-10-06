@@ -75,7 +75,7 @@ TMUX_POWERLINE_WINDOW_STATUS_STYLE="#[fg=colour248,nobold]"
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
     TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
         "tmux_session_info 148 234" \
-        "aws-sso-status #232f3e 0 ${TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD} #232f3e 0 right_disable"
+        "aws-sso-status #232f3e 0 ${TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD} 234 #232f3e right_disable"
     )
 fi
 
