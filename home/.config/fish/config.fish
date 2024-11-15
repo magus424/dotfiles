@@ -61,7 +61,7 @@ end
 
 if command_exists bat
     set -x DELTA_PAGER "less -R"
-    set -x MANPAGER "sh -c 'col -b | bat -l man --pager=\"less -R\"'"
+    set -x MANPAGER "sh -c 'col -b | bat -l man'"
     set -x PAGER "bat -p"
     abbr --add cat bat
 end
