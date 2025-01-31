@@ -30,6 +30,7 @@
 	sw = switch
 	swc = switch --create
 	um = fetch origin main:main
+	usm = !git um && git sw main
 	unstage = restore --staged
 	blm = blame -M
 	fnew = !git new --color=always | fzf --ansi --disabled --preview-window 'right,50%' --preview 'git show {1} | delta' --bind 'q:abort'
