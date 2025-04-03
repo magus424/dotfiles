@@ -26,6 +26,7 @@ conf:*.conf
 --glob=!bootstrap_assets/
 --glob=!braintree-data-collector.js
 --glob=!browscap.ini
+--glob=!browscap/cache.php
 --glob=!banned_merchants.csv
 --glob=!ckeditor
 --glob=!datastore.sql
@@ -42,8 +43,9 @@ conf:*.conf
 --glob=!prebid-v4*.js
 --glob=!prebid-v7*.js
 --glob=!pushnotification_cleanup_android_uninstall.php
---glob=!src/Migrations/*/*.php
 --glob=!slickdeals/scripts/bundles/*.js
+--glob=!src/Migrations/*/*.php
+--glob=!src/Repository/User/ClassicExperienceExclusionRepository.php
 --glob=!**/templates/MASTER/**.php
 --glob=!testReactApp
 --glob=!thttpd/
