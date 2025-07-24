@@ -81,7 +81,7 @@ fi
 
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
     TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-        # "aws-sso-status #232f3e 0" \
+        "current-sd-release 238 252" \
         "kube-context 236 252" \
         "dotfiles-status #006600 254" \
         "dotfiles-work-status #0072bc 254"
