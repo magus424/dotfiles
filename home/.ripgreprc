@@ -20,6 +20,9 @@ conf:*.conf
 --colors=match:fg:yellow
 --colors=match:style:bold
 
+--hidden
+--glob=!.git/
+--glob=!.idea/
 --glob=!*{.,-}min.js
 --glob=!*{.,-}pack.js
 --glob=!LoadStaticDataCommand.php
