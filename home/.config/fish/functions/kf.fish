@@ -12,13 +12,13 @@ end
 
 function kf
     switch $argv[1]
-        case ctx
+        case c
             __kf_context
         case context
             __kf_context
-        case ns
+        case n
             __kf_namespace
-        case namespace
+        case ns
             __kf_namespace
     end
 end
