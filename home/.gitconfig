@@ -38,6 +38,7 @@
 	flog = !git lg --color=always | fzf --ansi --preview-window 'right,50%' --preview 'git show {1} | delta'
 	pf = pull --ff
 	clean-local = !git_cleanup_local
+	cl = !git_cleanup_local
 
 [branch]
 	sort = -committerdate
