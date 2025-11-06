@@ -39,6 +39,7 @@
 	pf = pull --ff
 	clean-local = !git_cleanup_local
 	cl = !git_cleanup_local
+	usmcl = !git um && git sw main && git_cleanup_local
 
 [branch]
 	sort = -committerdate
