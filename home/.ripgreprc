@@ -35,6 +35,7 @@ conf:*.conf
 --glob=!datastore.sql
 --glob=!datastore_options.sql
 --glob=!dygraph-combined.js
+--glob=!extensionAnimation.html.twig
 --glob=!jquery.js
 --glob=!jquery.tablesorter.js
 --glob=!jquery.uploadify.js
@@ -43,14 +44,16 @@ conf:*.conf
 --glob=!lightbox.js
 --glob=!main.*.js
 --glob=!phpstan-baseline.neon
---glob=!prebid-v4*.js
---glob=!prebid-v7*.js
+--glob=!prebid-v*.js
 --glob=!pushnotification_cleanup_android_uninstall.php
 --glob=!slickdeals/scripts/bundles/*.js
 --glob=!src/Migrations/*/*.php
 --glob=!src/Repository/User/ClassicExperienceExclusionRepository.php
+--glob=!src/Test/Command/Fixtures/
 --glob=!**/templates/MASTER/**.php
+--glob=!template.sql
 --glob=!testReactApp
+--glob=!tests/fixtures/
 --glob=!thttpd/
 --glob=!vendor.js
 --glob=!yui/
