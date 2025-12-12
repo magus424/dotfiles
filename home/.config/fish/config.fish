@@ -61,7 +61,8 @@ end
 
 if command_exists bat
     set -x DELTA_PAGER "less -R"
-    set -x MANPAGER "sh -c 'col -b | bat -l man'"
+    set -x MANPAGER "sh -c \"sed -e 's/\\x1B\\[[0-9;]*[JKmsu]//g' | col -bx | bat -p -l man\""
+    set -x MANROFFOPT "-c"
     set -x PAGER "bat -p"
     abbr --add cat bat
 end
